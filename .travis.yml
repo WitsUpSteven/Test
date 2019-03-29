@@ -23,3 +23,10 @@ before_script:
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-27"
+
+script:
+  - ./gradlew check -PdisablePreDex --continue --stacktrace
+  - android-wait-for-emulator
+  - adb devices
+  - adb shell input keyevent 82 &
+  - ./gradlew connectedAndroidTest -PdisablePreDex --continue --stacktrace
