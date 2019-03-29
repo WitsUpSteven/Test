@@ -3,14 +3,7 @@ language: android
 sudo: false
 jdk:
   - oraclejdk8
-install:
-        - echo y | android update sdk -u -a -t tools
-        - echo y | android update sdk -u -a -t platform-tools
-        - echo y | android update sdk -u -a -t build-tools-25.0.2
-        - echo y | android update sdk -u -a -t android-25
-        - echo y | android update sdk -u -a -t extra-google-m2repository
-        - echo y | android update sdk -u -a -t extra-android-m2repository
-
+  
 android:
   components:
     - tools
@@ -30,4 +23,9 @@ before_script:
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-27"
+  
+install: skip
+  env:
+   global:
+    - CACHE_DIR=$([ $TRAVIS_OS_NAME = 'linux' ] && echo "FOO" || echo "BAR")
  
