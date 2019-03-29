@@ -22,3 +22,9 @@ before_script:
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-27"
+
+after_success:
+- ./gradlew check jacocoTestReport coveralls
+
+after_failure:
+- ./gradlew clean check --debug
