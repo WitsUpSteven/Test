@@ -20,8 +20,4 @@ before_install:
 script:
   - chmod +x gradlew
   
-after_success:
-- ./gradlew check jacocoTestReport coveralls
-
-after_failure:
-- ./gradlew clean check --debug
+after_success: coveralls
